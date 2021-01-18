@@ -99,7 +99,7 @@ class User extends DB
                                      ';   
                                 }
                                 echo '</select>
-                                <p class="help-block">Selecione ka herramienta...</p>
+                                <p class="help-block">Selecione la herramienta...</p>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -138,7 +138,12 @@ class User extends DB
                     </div>
                     </div>
                     </td>
-                    <td><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                    <td>
+                        <form method="post" action="Database/SQL/BorrarFuncionalidad.php" >
+                            <input type="hidden" id="idfunc" name="idfunc" value="'.$idfunc.'">       
+                            <button type="submit" name="dlteBtn" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </form>
+                    </td>
                     
                 </tr> 
                 ';
@@ -245,7 +250,12 @@ class User extends DB
                     </div>
                     </div>
                     </td>
-                    <td><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                    <td>
+                        <form method="post" action="Database/SQL/BorrarPractica.php" >
+                            <input type="hidden" id="idprac" name="idprac" value="'.$idpractica.'">       
+                            <button type="submit" name="dlteBtn" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </form>
+                    </td>
                     
                 </tr> 
                 ';
