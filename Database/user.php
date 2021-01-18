@@ -73,13 +73,12 @@ class User extends DB
                     <div id="modalF'.$idfunc.'" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
-                        
                         <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">' . $currentUser['Nombre_Funcionalidad'] . ' </h4>
                         </div>
-                        <form class="form-horizontal" method="post" action="Database/SQL/InsertarFuncionalidad.php" enctype="multipart/form-data" >
+                        <form class="form-horizontal" method="post" action="Database/SQL/UpdateFuncionalidad.php" enctype="multipart/form-data" >
 
                         <div class="modal-body">
                         <div class="row">
@@ -109,14 +108,8 @@ class User extends DB
                                     <p class="help-block">Nombre de la funcionalidad...</p>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2">Archivo</label>
-                                <div class="col-sm-12">
-                                    <input type="file" name="archivo">
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
+                            <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="descripcion">Descripción</label>
                                 <div class="col-sm-12">
@@ -126,10 +119,12 @@ class User extends DB
                                 </div>
                             </div>
                         </div>
+                        </div>
+                        
                     </div>
                         </div>
                         <div class="modal-footer">
-
+                        <input type="hidden" id="idfuncUPDATE" name="idfunc" value="'.$idfunc.'">           
                         <button type="button" id="Limpiar" name="Limpiar" class="btn btn-secondary" aria-label="limpiar" data-dismiss="modal">Salir</button>
                         <button type="subir"  name="subir" class="btn btn-primary" aria-label="subir">enviar</button>
                         </div>
@@ -192,7 +187,7 @@ class User extends DB
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">' . $currentUser['Nombre_Practica'] . ' </h4>
                         </div>
-                        <form class="form-horizontal" method="post" action="Database/SQL/InsertarFuncionalidad.php" enctype="multipart/form-data" >
+                        <form class="form-horizontal" method="post" action="Database/SQL/UpdatePracticas.php" enctype="multipart/form-data" >
 
                         <div class="modal-body">
                         <div class="row">
@@ -222,12 +217,6 @@ class User extends DB
                                     <p class="help-block">Nombre de la práctica...</p>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2">Archivo</label>
-                                <div class="col-sm-12">
-                                    <input type="file" name="archivo">
-                                </div>
-                            </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -242,6 +231,7 @@ class User extends DB
                     </div>
                         </div>
                         <div class="modal-footer">
+                        <input type="hidden" id="idpracUPDATE" name="idfunc" value="'.$idfunc.'">    
                         <button type="button" id="Limpiar" name="Limpiar" class="btn btn-secondary" aria-label="limpiar" data-dismiss="modal">Salir</button>
                         <button type="subir"  name="subir" class="btn btn-primary" aria-label="subir">enviar</button>
                         </div>
