@@ -50,10 +50,10 @@ $query->execute();
          $query3->execute();
         
          foreach ($query3 as $currentUser3) {
-         $id3= $currentUser['rec']+1; 
+         $id3= $currentUser3['rec']+1; 
 
-         $sth2 = $objData->prepare("INSERT INTO recursos_funcionalidades (id_RecursoF,Nombre_Archivo,Tamaño,Tipo,Ruta,FK_Funcionalidades)
-                             VALUES('.$id3.',:nombreArchivo,:tamanio,:tipo,:ruta,'.$id2.')");     
+         $sth2 = $objData->prepare('INSERT INTO recursos_funcionalidades (id_RecursoF,Nombre_Archivo,Tamaño,Tipo,Ruta,FK_Funcionalidades)
+                             VALUES('.$id3.',:nombreArchivo,:tamanio,:tipo,:ruta,'.$id2.')');     
          $sth2->bindParam(':nombreArchivo', $nombreArchivo);    
          $sth2->bindParam(':tamanio', $tamanio);  
          $sth2->bindParam(':ruta', $ruta); 

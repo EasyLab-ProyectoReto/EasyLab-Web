@@ -58,13 +58,21 @@ class User extends DB
                     <tbody>';
         foreach ($query1 as $currentUser) {
             $idfunc=$currentUser['id_Funcionalidad'];
+            $idHerr =$currentUser['FK_Herramientas_F'];
+             
+      
             echo '
                 <tr>
                     <td>' . $currentUser['Fecha'] . '</td>
                     <td>' . $currentUser['Nombre_Funcionalidad'] . '</td>
-                    <td>' . $currentUser['Descripcion'] . '</td>
-                    <td>' . $currentUser['Descripcion'] . '</td>
-                    <td> <a href="Database/SQL/Download.php"target="_blank"><img src="assets/img/pdf.png"></a> </td>
+                    <td>' . $currentUser['Descripcion'] . '</td>';
+                    $query2 = $this->connect()->prepare('SELECT nombre FROM herramientas WHERE id_Herramientas='.$idHerr.''); //preparamos consulta sql
+                    $query2->execute(); //Ejecutamos la consulta buscando en la base de datos siempre comparando con el usuario que ingresó en el login
+                    foreach ($query2 as $currentUser2) {        
+                    echo'<td>' . $currentUser2['nombre'] . '</td>';
+                    }
+                    echo'
+                    <td> <a href="Database/SQL/DownloadRecFuncionalidades.php?idFunc='.$idfunc.'"target="_blank"><img src="assets/img/pdf.png"></a> </td>
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalF'.$idfunc.'"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
                         
@@ -84,17 +92,18 @@ class User extends DB
                         <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
+                            <input type="hidden" id="idfuncUPDATE" name="idfuncUPDATE" value="'.$idfunc.'">     
                                 <label for="Herramienta" class="control-label col-sm-2">Herramienta:</label>
                                 <div class="col-sm-12" style="display: block;">';
                                     
-                                $query2 = $this->connect()->prepare('SELECT * FROM herramientas');
-                                $query2->execute();
+                                $query3 = $this->connect()->prepare('SELECT * FROM herramientas');
+                                $query3->execute();
                                 echo '
-                                <select class="form-select"  name="herramienta" id="herramienta">';
-                                foreach ($query2 as $currentUser2) {
-                                    $id= $currentUser2['id_Herramientas']; 
+                                <select class="form-select"  name="herramientaUP" id="herramientaUP">';
+                                foreach ($query3 as $currentUser3) {
+                                    $id= $currentUser3['id_Herramientas']; 
                                     echo '
-                                    <option name="herramienta" id="herramienta" value="'.$id.'">'.$currentUser2['nombre'].'</option>
+                                    <option name="herramientaUP" id="herramientaU´P" value="'.$id.'">'.$currentUser3['nombre'].'</option>
                                      ';   
                                 }
                                 echo '</select>
@@ -104,7 +113,7 @@ class User extends DB
                             <div class="form-group">
                                 <label for="Titulo" class="control-label col-sm-2">Nombre:</label>
                                 <div class="col-sm-12" style="display: block;">
-                                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="' . $currentUser['Nombre_Funcionalidad'] . '">
+                                    <input type="text" class="form-control" name="nombreUP" id="nombreUP" value="' . $currentUser['Nombre_Funcionalidad'] . '">
                                     <p class="help-block">Nombre de la funcionalidad...</p>
                                 </div>
                             </div>
@@ -113,7 +122,7 @@ class User extends DB
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="descripcion">Descripción</label>
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="7" placeholder="' . $currentUser['Descripcion'] . '"></textarea>
+                                    <textarea class="form-control" id="descripcionUP" name="descripcionUP" rows="7" >' . $currentUser['Descripcion'] . '</textarea>
                                     <p class="help-block">Descripción de la funcionalidad ....
                                     </p>
                                 </div>
@@ -124,7 +133,7 @@ class User extends DB
                     </div>
                         </div>
                         <div class="modal-footer">
-                        <input type="hidden" id="idfuncUPDATE" name="idfunc" value="'.$idfunc.'">           
+                            
                         <button type="button" id="Limpiar" name="Limpiar" class="btn btn-secondary" aria-label="limpiar" data-dismiss="modal">Salir</button>
                         <button type="subir"  name="subir" class="btn btn-primary" aria-label="subir">enviar</button>
                         </div>
@@ -165,14 +174,20 @@ class User extends DB
                     </thead>
                     <tbody>';
         foreach ($query1 as $currentUser) {
-            $idpractica=$currentUser['id_Practica'];   
+            $idpractica=$currentUser['id_Practica'];  
+            $idHerrP =$currentUser['FK_Herramientas_P']; 
             echo '
                 <tr>
                     <td>' . $currentUser['Fecha'] . '</td>
                     <td>' . $currentUser['Nombre_Practica'] . '</td>
-                    <td>' . $currentUser['Descripcion'] . '</td>
-                    <td>' . $currentUser['Descripcion'] . '</td>
-                    <td> <a href="Database/SQL/Download.php"target="_blank"><img src="assets/img/pdf.png"></a> </td>
+                    <td>' . $currentUser['Descripcion'] . '</td>';
+                    $query2 = $this->connect()->prepare('SELECT nombre FROM herramientas WHERE id_Herramientas='.$idHerrP.''); //preparamos consulta sql
+                    $query2->execute(); //Ejecutamos la consulta buscando en la base de datos siempre comparando con el usuario que ingresó en el login
+                    foreach ($query2 as $currentUser2) {        
+                    echo'<td>' . $currentUser2['nombre'] . '</td>';
+                    }
+                    echo'
+                    <td> <a href="Database/SQL/DownloadRecPracticas.php?idPractica='.$idpractica.'"target="_blank"><img src="assets/img/pdf.png"></a> </td>
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalP'.$idpractica.'"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
                         
@@ -196,14 +211,14 @@ class User extends DB
                                 <label for="Herramienta" class="control-label col-sm-2">Herramienta:</label>
                                 <div class="col-sm-12" style="display: block;">';
                                     
-                                $query2 = $this->connect()->prepare('SELECT * FROM herramientas');
-                                $query2->execute();
+                                $query3 = $this->connect()->prepare('SELECT * FROM herramientas');
+                                $query3->execute();
                                 echo '
-                                <select class="form-select"  name="herramienta" id="herramienta">';
-                                foreach ($query2 as $currentUser2) {
-                                    $id= $currentUser2['id_Herramientas']; 
+                                <select class="form-select"  name="herramientaUP" id="herramientaUP">';
+                                foreach ($query3 as $currentUser3) {
+                                    $id= $currentUser3['id_Herramientas']; 
                                     echo '
-                                    <option name="herramienta" id="herramienta" value="'.$id.'">'.$currentUser2['nombre'].'</option>
+                                    <option name="herramientaUP" id="herramientaUP" value="'.$id.'">'.$currentUser3['nombre'].'</option>
                                      ';   
                                 }
                                 echo '</select>
@@ -213,7 +228,8 @@ class User extends DB
                             <div class="form-group">
                                 <label for="Titulo" class="control-label col-sm-2">Nombre:</label>
                                 <div class="col-sm-12" style="display: block;">
-                                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="' . $currentUser['Nombre_Practica'] . '">
+                                <input type="hidden" id="idpracUPDATE" name="idpracUPDATE" value="'.$idpractica.'">    
+                                    <input type="text" class="form-control" name="nombreUP" id="nombreUP" value="' . $currentUser['Nombre_Practica'] . '">
                                     <p class="help-block">Nombre de la práctica...</p>
                                 </div>
                             </div>
@@ -222,7 +238,7 @@ class User extends DB
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="descripcion">Descripción</label>
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="7" placeholder="' . $currentUser['Descripcion'] . '"></textarea>
+                                    <textarea class="form-control" id="descripcionUP" name="descripcionUP" rows="7" >' . $currentUser['Descripcion'] . '</textarea>
                                     <p class="help-block">Descripción de la práctica ....
                                     </p>
                                 </div>
@@ -231,7 +247,7 @@ class User extends DB
                     </div>
                         </div>
                         <div class="modal-footer">
-                        <input type="hidden" id="idpracUPDATE" name="idfunc" value="'.$idfunc.'">    
+                      
                         <button type="button" id="Limpiar" name="Limpiar" class="btn btn-secondary" aria-label="limpiar" data-dismiss="modal">Salir</button>
                         <button type="subir"  name="subir" class="btn btn-primary" aria-label="subir">enviar</button>
                         </div>
