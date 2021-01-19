@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-01-2021 a las 04:13:54
+-- Tiempo de generación: 19-01-2021 a las 01:20:42
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -52,11 +52,11 @@ CREATE TABLE `funcionalidades` (
 --
 
 INSERT INTO `funcionalidades` (`id_Funcionalidad`, `Fecha`, `Nombre_Funcionalidad`, `Descripcion`, `FK_Herramientas_F`) VALUES
-(1, '2020-12-15', 'Casos de uso', 'Casos de uso en Enterprise Architect', 1),
-(2, '2020-12-18', 'Diagramas de contexto', 'Diagramas de contexto en Enterprise Architect', 1),
-(3, '2021-01-05', 'WBS', NULL, 2),
-(4, '2021-01-18', 'asdasdasdasd', 'asdasd', 1),
-(5, '2021-01-18', 'asdasdasdasd', 'asdasd', 1);
+(1, '2021-01-18', 'Estructura de desglose de tareas', 'Work Breakdown Structure - WBS', 3),
+(3, '2021-01-18', 'LA IMPORTANCIA DE UTILIZAR EDT (WBS) Y LÍNEAS BASE EN EL CONTROL DE PROYECTOS DE INFRAESTRUCTURA', 'Análisis de la metodología de la EDT (WBS) y la Línea Base Presupuestal para aplicarla en un proyecto de infraestructura: Planta Criogénica ', 2),
+(9, '2021-01-18', 'MICROSOFT PROJECT PROFESSIONAL 2013', 'Orientacion al usuario primero en las funciones del manejo\r\nde la herramienta Microsoft Office Project Professional 2013', 2),
+(10, '2021-01-18', 'Uso de Microsoft Project', 'En este documento se muestra una referencia orientada al uso del programa de Microsoft Project 2016', 2),
+(11, '2021-01-18', 'Enterprise Architect: Manual de usuario', 'El presente documento describe cuales son las tareas básicas que se pueden ejecutar en la explotación de la herramienta de modelado Enterprise Architect Corporate Edition.', 1);
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,8 @@ CREATE TABLE `herramientas` (
 
 INSERT INTO `herramientas` (`id_Herramientas`, `nombre`, `descripcion`) VALUES
 (1, 'Enterprise Architect', 'Herramienta para modelado'),
-(2, 'Microsof Project', 'Herramienta para establecer tareas');
+(2, 'Microsof Project', 'Herramienta para establecer tareas'),
+(3, 'Project libre', 'Herramienta para desglose de tareas');
 
 -- --------------------------------------------------------
 
@@ -97,10 +98,10 @@ CREATE TABLE `practicas` (
 --
 
 INSERT INTO `practicas` (`id_Practica`, `Fecha`, `Nombre_Practica`, `Descripcion`, `FK_Herramientas_P`) VALUES
-(1, '2020-12-15', 'Practia diagramas de contexto', 'Practia para el repaso de los diagramas de contexto', 1),
-(2, '2020-12-18', 'Practica casos de uso', 'Practia para el repaso de los casos de uso', 1),
-(3, '2021-01-05', 'Practica wbs', 'Practia para el repaso de wbs', 2),
-(4, '2021-01-18', 'aaa', 'aaasdasd', 2);
+(1, '2021-01-18', 'EJERCICIO PARA EL CURSO BÁSICO DE MICROSOFT PROJECT', 'Se trata de construir una pequeña vivienda.', 2),
+(3, '2021-01-18', 'Proyectos de Sistemas de Software – 2016', 'Project Libre', 3),
+(4, '2021-01-18', 'EVALUACIÓN DE LAS APLICACIONES PROJECT LIBRE VERSUS MICROSOFT ', 'Ejercicios de obras civiles', 3),
+(5, '2021-01-18', 'Ejercicios	modelado de software', 'Ejercicios	modelado en Enterprise Architect', 1);
 
 -- --------------------------------------------------------
 
@@ -112,10 +113,21 @@ CREATE TABLE `recursos_funcionalidades` (
   `id_RecursoF` int(11) NOT NULL,
   `Nombre_Archivo` varchar(100) NOT NULL,
   `Tamaño` int(11) NOT NULL,
-  `Tipo` varchar(45) NOT NULL,
+  `Tipo` varchar(50) NOT NULL,
   `Ruta` varchar(500) NOT NULL,
   `FK_Funcionalidades` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `recursos_funcionalidades`
+--
+
+INSERT INTO `recursos_funcionalidades` (`id_RecursoF`, `Nombre_Archivo`, `Tamaño`, `Tipo`, `Ruta`, `FK_Funcionalidades`) VALUES
+(0, 'Tesis_Miguel Angel Martínez Reyes .pdf', 2449957, 'pdf', 'C:/xampp/htdocs/EasyLabWeb/assets/Archivos/Tesis_Miguel Angel Martínez Reyes .pdf', 3),
+(1, 'Estructura-de-desglose-de-tareas.pdf', 360324, 'pdf', 'C:/xampp/htdocs/EasyLabWeb/assets/Archivos/Estructura-de-desglose-de-tareas.pdf', 1),
+(2, 'Manual Microsoft Project Professional.pdf', 4088795, 'pdf', 'C:/xampp/htdocs/EasyLabWeb/assets/Archivos/Manual Microsoft Project Professional.pdf', 9),
+(3, 'project-2016.pdf', 12879955, 'pdf', 'C:/xampp/htdocs/EasyLabWeb/assets/Archivos/project-2016.pdf', 10),
+(4, 'EA. Manual de usuario para ArinBide v1.2.pdf', 5975483, ' Manual de usuario para ArinBide v1', 'C:/xampp/htdocs/EasyLabWeb/assets/Archivos/EA. Manual de usuario para ArinBide v1.2.pdf', 11);
 
 -- --------------------------------------------------------
 
@@ -127,10 +139,20 @@ CREATE TABLE `recursos_practicas` (
   `id_RecursoP` int(11) NOT NULL,
   `Nombre_Archivo` varchar(100) NOT NULL,
   `Tamaño` int(11) NOT NULL,
-  `Tipo` varchar(45) NOT NULL,
+  `Tipo` varchar(500) NOT NULL,
   `Ruta` varchar(500) NOT NULL,
   `FK_Practicas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `recursos_practicas`
+--
+
+INSERT INTO `recursos_practicas` (`id_RecursoP`, `Nombre_Archivo`, `Tamaño`, `Tipo`, `Ruta`, `FK_Practicas`) VALUES
+(1, 'f2963a_37060076ce1544098575ade16f8a3dd6.pdf', 229527, 'pdf', 'C:/xampp/htdocs/EasyLabWeb/assets/Archivos/f2963a_37060076ce1544098575ade16f8a3dd6.pdf', 1),
+(2, '03-Presentacion ProjectLibre 8Septiembre2016.pdf', 668313, 'pdf', 'C:/xampp/htdocs/EasyLabWeb/assets/Archivos/03-Presentacion ProjectLibre 8Septiembre2016.pdf', 3),
+(3, 'Evaluacion de las aplicaciones project libre Vs microsoft project en la programacion de un proyecto ', 2862562, 'pdf', 'C:/xampp/htdocs/EasyLabWeb/assets/Archivos/Evaluacion de las aplicaciones project libre Vs microsoft project en la programacion de un proyecto de edificacion.pdf', 4),
+(4, 'ejercicios_modelado.pdf', 1618400, 'pdf', 'C:/xampp/htdocs/EasyLabWeb/assets/Archivos/ejercicios_modelado.pdf', 5);
 
 -- --------------------------------------------------------
 
